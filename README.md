@@ -1,42 +1,49 @@
-Chapter 6 :- Set up database
+Chapter 7
 
-                To Deploy
+Fetching Data
 
-1. Create a gihub repo and vercel account 
+Fetching data for the dashboard overview page
 
-2. deploy project.
+1. Navigate to /app/dashboard/page.tsx, paste the following code.
 
-3.Next, you'll be taken to this screen where you can select and import the GitHub repository you've just created:
+import { Card } from '@/app/ui/dashboard/cards';
+import RevenueChart from '@/app/ui/dashboard/revenue-chart';
+import LatestInvoices from '@/app/ui/dashboard/latest-invoices';
+import { lusitana } from '@/app/ui/fonts';
+ 
+export default async function Page() {
+  return (
+    <main>
+      <h1 className={`${lusitana.className} mb-4 text-xl md:text-2xl`}>
+        Dashboard
+      </h1>
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {/* <Card title="Collected" value={totalPaidInvoices} type="collected" /> */}
+        {/* <Card title="Pending" value={totalPendingInvoices} type="pending" /> */}
+        {/* <Card title="Total Invoices" value={numberOfInvoices} type="invoices" /> */}
+        {/* <Card
+          title="Total Customers"
+          value={numberOfCustomers}
+          type="customers"
+        /> */}
+      </div>
+      <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-4 lg:grid-cols-8">
+        {/* <RevenueChart revenue={revenue}  /> */}
+        {/* <LatestInvoices latestInvoices={latestInvoices} /> */}
+      </div>
+    </main>
+  );
+}
 
-4. Name your project and click Deploy.
+                        Fetching data for <RevenueChart/>
 
-5. Hooray! 🎉 Your project is now deployed.
+1. To fetch data for the <RevenueChart/> component, import the fetchRevenue function from data.ts and call it inside your component:
 
-6. By connecting your GitHub repository, whenever you push changes to your main branch, Vercel will automatically redeploy your application with no configuration needed. When opening pull requests, you'll also have instant previews which allow you to catch deployment errors early and share a preview of your project with team members for feedback.
+2. Then, uncomment the <RevenueChart/> component, navigate to the component file (/app/ui/dashboard/revenue-chart.tsx) and uncomment the code inside it. Check your localhost, you should be able to see a chart that uses revenue data.
 
-        Create a Postgres database
+                        Fetching data for <LatestInvoices/>
 
-1. Next, to set up a database, click Continue to Dashboard and select the Storage tab from your project dashboard. Select Connect Store → Create New → Postgres → Continue.
+1. In your page, import the fetchLatestInvoices function:
 
-
-2. and ensure your database region is set to Washington D.C (iad1)
-
-3.Once connected, navigate to the .env.local tab, click Show secret and Copy Snippet. Make sure you reveal the secrets before copying them.
-
-4. Navigate to your code editor and create file .env. Paste in the copied contents from Vercel.
-
-5.  Go to your .gitignore file and make sure .env is in the ignored files to prevent your database secrets from being exposed when you push to GitHub.
-
-6. Finally, run pnpm i @vercel/postgres in your terminal to install the Vercel Postgres SDK.
-
-                        Seed your database
-
-1. Inside of /app, there's a folder called seed. Uncomment this file. This folder contains a Next.js Route Handler, called route.ts, that will be used to seed your database.
-
-2.  Ensure your local development server is running with pnpm run dev and navigate to localhost:3000/seed in your browser. When finished, you will see a message "Database seeded successfully" in the browser. Once completed, you can delete this file.
-
-
-
-
-
+2. Then, uncomment the <LatestInvoices /> component. You will also need to uncomment the relevant code in the <LatestInvoices /> component itself, located at /app/ui/dashboard/latest-invoices.
 
